@@ -1,0 +1,27 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.1972
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AttendanceManagment", "AttendanceManagment\AttendanceManagment.csproj", "{8407B46E-8845-4C0A-8C78-18D71C254D1D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{18101995-978C-4E67-8E1A-7BB9A9694775}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8407B46E-8845-4C0A-8C78-18D71C254D1D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8407B46E-8845-4C0A-8C78-18D71C254D1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8407B46E-8845-4C0A-8C78-18D71C254D1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8407B46E-8845-4C0A-8C78-18D71C254D1D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E9C288DA-2F89-4E41-9E03-DBB3977B8444}
+	EndGlobalSection
+EndGlobal
