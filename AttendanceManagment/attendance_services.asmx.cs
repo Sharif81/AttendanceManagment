@@ -503,40 +503,72 @@ namespace AttendanceManagment
 
         #region Salary Status Info
 
-        //[WebMethod]
-        //[ScriptMethod (ResponseFormat = ResponseFormat.Json)]
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public void Process_Salary(string salaryobj)
+        {
+            int salary_for = 0;
+            QuerySalaryProcess qobj = JsonConvert.DeserializeObject<QuerySalaryProcess>(salaryobj);
 
-        //public void Insert_Update_SalaryInfo(string insertObject)
-        //{
-        //    SalaryStatus salarydata = JsonConvert.DeserializeObject<SalaryStatus>(insertObject);
+            using (SqlConnection con = new SqlConnection(DBConnection.DataBaseConnection))
+            {
+                SqlCommand cmd = new SqlCommand("GetProcessMonthlySalary", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add("@month", SqlDbType.VarChar).Value = qobj.Salary_month;
+                cmd.Parameters.Add("@year", SqlDbType.Int).Value = qobj.Salary_year;
+                con.Open();
+                SqlDataReader rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    SalaryStatus obj = new SalaryStatus();
+                    obj.SalaryID = 0;
+                    obj.EmpCode = Convert.ToInt32(rdr["PersonID"]);
+                    obj.MedicalAllowance = Convert.ToInt32(rdr["Medical"]);
+                    obj.FoodAllowance = Convert.ToInt32(rdr["Food"]);
+                    obj.HouseRent = Convert.ToDecimal(rdr["HouseRent"]);
+                    obj.Basic = Convert.ToDecimal(rdr["Basic_salary"]);
+                    obj.OthersAllowance = 0;
+                    obj.AbsentDay = Convert.ToInt32(rdr["emp_absent"]);
+                    obj.PresentDay = Convert.ToInt32(rdr["emp_present"]);
+                    obj.LeaveStatus = Convert.ToInt32(rdr["emp_leave"]);
+                    obj.Year = Convert.ToInt32(rdr["Salary_year"]);
+                    obj.Month = rdr["Salary_month"].ToString();
 
-        //    using(SqlConnection con = new SqlConnection(DBConnection.DataBaseConnection))
-        //    {
-        //        SqlCommand cmd = new SqlCommand("InsertUpdateSalaryInfo", con);
-        //        cmd.CommandType = CommandType.StoredProcedure;
-        //        cmd.Parameters.Add("@cmdtype", SqlDbType.VarChar).Value = salarydata.SalaryID == 0 ? "NEW" : "UPDATE";
-        //        cmd.Parameters.Add("@salaryid", SqlDbType.Int).Value = salarydata.SalaryID;
-        //        cmd.Parameters.Add("@personid", SqlDbType.Int).Value = salarydata.EmpCode;
-        //        cmd.Parameters.Add("@medicalallowance", SqlDbType.Decimal).Value = salarydata.MedicalAllowance;
-        //        cmd.Parameters.Add("@foodallowance", SqlDbType.Decimal).Value = salarydata.FoodAllowance;
-        //        cmd.Parameters.Add("@houserent", SqlDbType.Decimal).Value = salarydata.HouseRent;
-        //        cmd.Parameters.Add("@othersallowance", SqlDbType.Decimal).Value = salarydata.OthersAllowance;
-        //        cmd.Parameters.Add("@absentday", SqlDbType.Int).Value = salarydata.AbsentDay;
-        //        cmd.Parameters.Add("@presentday", SqlDbType.Int).Value = salarydata.PresentDay;
-        //        cmd.Parameters.Add("@leavestatus", SqlDbType.Int).Value = salarydata.LeaveStatus;
-        //        con.Open();
+                    salary_for+= Insert_Update_SalaryInfo(obj);
+                }
+            }
 
-        //        if (cmd.ExecuteNonQuery() > 0)
-        //        {
-        //            Context.Response.Write("Inserted");
-        //        }
-        //        else
-        //        {
-        //            Context.Response.Write("Invalid");
-        //        }
-        //    }            
+            Context.Response.Write(js.Serialize(salary_for));
 
-        //}
+        }
+        
+
+        private int Insert_Update_SalaryInfo(SalaryStatus obj)
+        {
+            int row_count = 0;
+            using (SqlConnection con = new SqlConnection(DBConnection.DataBaseConnection))
+            {
+                SqlCommand cmd = new SqlCommand("InsertUpdateSalaryInfo", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add("@cmdtype", SqlDbType.VarChar).Value = obj.SalaryID == 0 ? "NEW" : "UPDATE";
+                cmd.Parameters.Add("@salaryid", SqlDbType.Int).Value = obj.SalaryID;
+                cmd.Parameters.Add("@personid", SqlDbType.Int).Value = obj.EmpCode;
+                cmd.Parameters.Add("@medicalallowance", SqlDbType.Int).Value = obj.MedicalAllowance;
+                cmd.Parameters.Add("@foodallowance", SqlDbType.Int).Value = obj.FoodAllowance;
+                cmd.Parameters.Add("@houserent", SqlDbType.Decimal).Value = obj.HouseRent;
+                cmd.Parameters.Add("@othersallowance", SqlDbType.Int).Value = obj.OthersAllowance;
+                cmd.Parameters.Add("@absentday", SqlDbType.Int).Value = obj.AbsentDay;
+                cmd.Parameters.Add("@presentday", SqlDbType.Int).Value = obj.PresentDay;
+                cmd.Parameters.Add("@leavestatus", SqlDbType.Int).Value = obj.LeaveStatus;
+                cmd.Parameters.Add("@month", SqlDbType.VarChar).Value = obj.Month;
+                cmd.Parameters.Add("@year", SqlDbType.Int).Value = obj.Year;
+                cmd.Parameters.Add("@basic", SqlDbType.Decimal).Value = obj.Basic;
+                con.Open();
+                row_count = cmd.ExecuteNonQuery();
+            }
+            return row_count;
+
+        }
         #endregion
 
 

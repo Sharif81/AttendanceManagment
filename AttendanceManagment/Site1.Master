@@ -189,12 +189,32 @@
                                 <!--- Salary Status-->
                                 <li class="nav-item">
                                     <a class="nav-link" href="<%=Page.ResolveUrl("~/salary.aspx") %>">
-                                        <i class="nav-icon fas fa fa-users"></i>
+                                       <i class="nav-icon fab fa-firefox"></i> 
                                         <p>
-                                            Salary Status
+                                            Salary Process
                                         </p>
                                     </a>
                                 </li>
+
+
+                                 <!---Report-->
+                                  <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                       <i class="nav-icon fas fa-signal"></i>
+                                        <p>
+                                           Reports<i class="right fas fa-angle-left"></i>
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="<%=Page.ResolveUrl("~/salarysheetreport.aspx") %>">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Salary Sheet</p>
+                                            </a>
+                                        </li>                                                                          
+                                    </ul>
+                                </li>
+
 
                             </ul>
                         </nav>

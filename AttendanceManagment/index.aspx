@@ -22,7 +22,7 @@
     <!-- Main content -->
     <section class="content">
         <div class="container">
-            <h2 class="text-center"><b>Welcome <br /> Asian Attendance System</b></h2>
+            <h2 class="text-center text-primary"><b>Welcome To Asian Group <br /> Attendance Management System</b></h2>
         </div>
     </section>
 
