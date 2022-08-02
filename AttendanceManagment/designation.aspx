@@ -91,6 +91,15 @@
                     save_designation_info(obj);
                 }
             });
+
+            $(document).on('click', '.btn-edit', function () {
+                $("#html, body").animate({ scrollTop: 0 }, 50);
+                $("#departmentname").val($(this).attr("data-departmentname"));
+                $("#designationname").val($(this).attr("data-designationname"));
+                $("#btn-submit").attr('data-id', $(this).attr("data-designationid")).html('<i class="far fa-edit"></i> Update');
+            });
+
+             
         });
         
         function ResetDesignationForm() {
@@ -119,7 +128,7 @@
                     var tbody_r = '';
                     $.each(data, function (i, r) {
 
-                        tbody_r += '</tr><td>' + (i + 1) + '</td><td>' + r.DepartmentName + '</td><td>' + r.DesignationName + '</td><td>  <button type="button" class="btn btn-sm btn-info"><i class="fa fa-edit"></i></button> <button type="button" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button> </td></tr>'
+                        tbody_r += '</tr><td>' + (i + 1) + '</td><td>' + r.DepartmentName + '</td><td>' + r.DesignationName + '</td><td>  <button type="button" data-departmentname="'+r.DepartmentName+'" data-designame="' + r.DesignationName +'" class="btn btn-sm btn-info"><i class="fa fa-edit"></i></button> <button type="button" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button> </td></tr>'
 
                     });
                     $("#show-designation-table>tbody").empty().append(tbody_r);
@@ -154,7 +163,7 @@
                 {
                     'data': null, //its null here because history column will contain the mRender
                     "mRender": function (data) {
-                        return '<button data-toggle="modal" class="btn btn-edit btn-info p-0 px-2" type="button" data-deptid="' + data.Id + '"><i class="fa fa-edit"></i></button> <button class="btn btn-danger p-0 px-2" type="button" data-id"' + data.Id + '" ><i class="fas fa-trash"></i></button>';
+                        return '<button data-toggle="modal" class="btn btn-edit btn-info p-0 px-2" type="button" data-deptid="' + data.Id + '" data-departmentname="' + data.DepartmentName + '" data-designationname="' + data.DesignationName + '"><i class="fa fa-edit"></i></button> <button class="btn btn-danger p-0 px-2" type="button" data-id"' + data.Id + '" ><i class="fas fa-trash"></i></button>';
                     }
                 }
             ]

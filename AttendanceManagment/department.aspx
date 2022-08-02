@@ -81,6 +81,37 @@
                 }
 
             });
+
+             $(document).on('click', '.tableid', function () {
+                var tableid = parseInt($(this).attr('data-id'));
+                swal({
+                    title: "Are you sure?",
+                    text: "You will not be able to deleted this file!",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                    .then((willDelete) => {
+                        if (willDelete) {
+                           DeletedDepartmentTable(tableid);
+
+                            swal("Poof! Your file has been deleted!", {
+                                icon: "success",
+                            });
+                        } else {
+                            swal("Your file is safe!");
+                        }
+                    });
+               
+            });
+
+
+             $(document).on('click', '.edit-btn', function () {
+                $("html, body").animate({ scrollTop: 0 }, 50);
+                $('#departmentname').val($(this).attr('data-departmentname'));
+                $('#btn-submit').attr('data-id', $(this).attr('data-departmentid')).html('<i class="far fa-edit"></i> Update');
+                
+            })
         });
 
         function save_department_info(obj) {
@@ -108,12 +139,24 @@
                     var tbody_tr = '';
                     $.each(data, function (i, r) {
 
-                        tbody_tr += '<tr><td>' + (i + 1) + '</td><td>' + r.DepartmentID + '</td><td>' + r.DepartmentName + '</td><td> <button type="button" class="btn btn-sm btn-info"><i class="fa fa-edit"></i></button>  <button type="button" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button> </td></tr>'
+                        tbody_tr += '<tr><td>' + (i + 1) + '</td><td>' + r.DepartmentID + '</td><td>' + r.DepartmentName + '</td><td> <button type="button" data-departmentid="'+r.DepartmentID+'" data-departmentname="'+r.DepartmentName+'" class="edit-btn btn-sm btn-info"><i class="fa fa-edit"></i></button>  <button type="button" data-id="'+r.DepartmentID+'" class="btn btn-sm btn-danger tableid"><i class="fa fa-trash"></i></button> </td></tr>'
                     });
                     $("#show-department-table>tbody").empty().append(tbody_tr);
                     $("#show-department-table").DataTable();
                 }
 
+            });
+        }
+        function DeletedDepartmentTable(tableid) {
+            $.post('<%=Page.ResolveUrl("~/attendance_services.asmx/DeletedDepartment")%>', { deptid: tableid }, function (data, status, xhr) {
+
+                if (status == 'success') {
+
+               Get_Company_Table_Info();
+
+
+          
+                }
             });
         }
     </script>

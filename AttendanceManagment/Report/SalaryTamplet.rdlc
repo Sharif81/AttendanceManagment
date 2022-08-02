@@ -5680,7 +5680,7 @@
   <Width>13.00001in</Width>
   <Page>
     <PageHeader>
-      <Height>1.20708in</Height>
+      <Height>1.24875in</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -5741,7 +5741,6 @@
           </Paragraphs>
           <rd:DefaultName>Textbox1</rd:DefaultName>
           <Top>0.01389in</Top>
-          <Left>0in</Left>
           <Height>0.25in</Height>
           <Width>12.9038in</Width>
           <ZIndex>1</ZIndex>
@@ -5778,7 +5777,6 @@
           </Paragraphs>
           <rd:DefaultName>Textbox15</rd:DefaultName>
           <Top>0.31598in</Top>
-          <Left>0in</Left>
           <Height>0.14944in</Height>
           <Width>12.9038in</Width>
           <ZIndex>2</ZIndex>

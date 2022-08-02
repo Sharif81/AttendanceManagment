@@ -236,6 +236,50 @@
                 }
             });
 
+                                   
+             $(document).on('click', '.tableid', function () {
+                var tableid = parseInt($(this).attr('data-id'));
+                swal({
+                    title: "Are you sure?",
+                    text: "You will not be able to deleted this file!",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                    .then((willDelete) => {
+                        if (willDelete) {
+                            DeletedPersonTableInfo(tableid);
+
+                            swal("Poof! Your file has been deleted!", {
+                                icon: "success",
+                            });
+                        } else {
+                            swal("Your file is safe!");
+                        }
+                    });
+               
+            });
+
+
+            $(document).on('click', '.btn-edit', function () {
+                $("#exampleModal").modal('show');
+             //   $("html, body").animate({ scrollTop: 0 }, 50);
+                $("#empname").val($(this).attr("data-empname"));
+                $("#fathername").val($(this).attr("data-fathername"));
+                $("#mothername").val($(this).attr("data-mothername"));
+                $("#dateofbirth").val($(this).attr("data-dateofbirth"));
+                $("#materialstatus").val($(this).attr("data-material")).trigger('change');
+                $("#religion").val($(this).attr("data-religion")).trigger('change');
+                $("#gender").val($(this).attr("data-gender")).trigger('change');
+                $("#nationalid").val($(this).attr("data-nationalid"));
+                $("#contact").val($(this).attr("data-email"));
+                $("#email").val($(this).attr("data-email"));
+                $("#bloodgroup").val($(this).attr("data-blood"));
+                $('#btn-submit').attr('data-id', $(this).attr('data-personid')).html('<i class="far fa-edit"></i> Update');
+            });
+
+
+
             $('.datepicker').daterangepicker({
                 singleDatePicker: true,
                 autoApply: true,
@@ -259,6 +303,18 @@
             });
         }
 
+        
+        function DeletedPersonTableInfo(tableid) {
+            $.post('<%=Page.ResolveUrl("~/attendance_services.asmx/DeletedPersonInfo")%>', { PersonID: tableid }, function (data, status, xhr) {
+
+                if (status == "success") {
+
+                    Get_All_PersonInfo();
+                }
+
+            });
+        }
+
 
         function Get_All_PersonInfo() {
             $.getJSON('<%=Page.ResolveUrl("~/attendance_services.asmx/Get_PersonInfo")%>', function (data, status, xhr) {
@@ -269,7 +325,7 @@
                     var tbody_tr = '';
                     $.each(data, function (i, r) {
 
-                        tbody_tr += '<tr><td>' + (i + 1) + '</td><td>' + r.EmployeeName + '</td><td>' + r.FatherName + '</td><td>' + r.MotherName + '</td><td>' + r.DateOfBirth + '</td><td>' + r.MaterialStatus + '</td><td>' + r.Religion + '</td><td>' + r.Gender + '</td><td>' + r.NationalID + '</td><td>' + r.ContactNo + '</td><td>' + r.Email + '</td><td>' + r.BloodGroup + '</td><td> <button type="button" class="btn btn-sm btn-info"><i class="fa fa-edit"></i></button> <button type="button" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button> </td></tr>' 
+                        tbody_tr += '<tr><td>' + (i + 1) + '</td><td>' + r.EmployeeName + '</td><td>' + r.FatherName + '</td><td>' + r.MotherName + '</td><td>' + r.DateOfBirth + '</td><td>' + r.MaterialStatus + '</td><td>' + r.Religion + '</td><td>' + r.Gender + '</td><td>' + r.NationalID + '</td><td>' + r.ContactNo + '</td><td>' + r.Email + '</td><td>' + r.BloodGroup + '</td><td> <button type="button" data-personid="' + r.PersonID + '" data-empname="' + r.EmployeeName + '" data-fathername="' + r.FatherName + '" data-mothername="' + r.MotherName + '" data-dateofbirth="' + r.DateOfBirth + '" data-material="' + r.MaterialStatus + '" data-religion="' + r.Religion + '" data-gender="' + r.Gender + '" data-nationalid="' + r.NationalID + '" data-contact="' + r.ContactNo + '" data-email="' + r.Email + '" data-blood="' + r.BloodGroup + '" class="btn btn-edit btn-sm btn-info"><i class="fa fa-edit"></i></button> <button type="button" data-id="' + r.PersonID + '" class="btn btn-sm btn-danger tableid"><i class="fa fa-trash"></i></button> </td></tr>' 
 
                     });
 

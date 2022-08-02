@@ -85,6 +85,36 @@
                     save_floor_info(obj);
                 }
             });
+
+             $(document).on('click', '.tableid', function () {
+                var tableid = parseInt($(this).attr('data-floorid'));
+                swal({
+                    title: "Are you sure?",
+                    text: "You will not be able to deleted this file!",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                    .then((willDelete) => {
+                        if (willDelete) {
+                            DeletedFloorTable(tableid);
+
+                            swal("Poof! Your file has been deleted!", {
+                                icon: "success",
+                            });
+                        } else {
+                            swal("Your file is safe!");
+                        }
+                    });
+               
+            });
+
+            $(document).on('click', '.btn-edit', function () {
+                $("html, body").animate({ scrollTop: 0 }, 50);
+                $('#floorname').val($(this).attr('data-floorname'));
+                $('#btn-submit').attr('data-id', $(this).attr('data-floorid')).html('<i class="fa-solid fa-edit"></i> Update');
+                
+            })
         });
 
         function save_floor_info(obj) {
@@ -128,11 +158,24 @@
                 {
                     'data': null, //its null here because history column will contain the mRender
                     "mRender": function (data) {
-                        return '<button data-toggle="modal" class="btn btn-edit btn-info p-0 px-2" type="button" data-deptid="' + data.Id + '"><i class="fa fa-edit"></i></button> <button class="btn btn-danger p-0 px-2" type="button" data-id"' + data.Id + '" ><i class="fas fa-trash"></i></button>';
+                        return '<button data-toggle="modal" class="btn btn-edit btn-info p-0 px-2" type="button" data-deptid="' + data.Id + '" data-floorid="' + data.FloorID + '" data-floorname="' + data.FloorName + '"><i class="fa fa-edit"></i></button> <button class="btn btn-danger tableid p-0 px-2" type="button" data-id"' + data.Id + '" data-floorid="' + data.FloorID + '"><i class="fas fa-trash"></i></button>';
                     }
                 }
             ]
         });
+
+        function DeletedFloorTable(tableid) {
+            $.post('<%=Page.ResolveUrl("~/attendance_services.asmx/DeletedFloorId")%>', { floorid: tableid }, function (data, status, xhr) {
+
+                if (status == 'success') {
+
+                     reDrawTable();
+
+          
+                }
+            });
+        }
+
 
     </script>
 </asp:Content>

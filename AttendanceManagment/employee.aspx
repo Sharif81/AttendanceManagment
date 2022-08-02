@@ -295,7 +295,7 @@
                 if (status == 'success') {
                     var tbody_tr = '';
                     $.each(data, function (i, r) {
-                        tbody_tr += '<tr><td>' + (i + 1) + '</td><td>' + r.EmpName + '</td><td>' + r.CardNo + '</td><td>' + r.Department + '</td><td>' + r.Designation + '</td><td>' + r.Floor + '</td><td>' + r.Line + '</td><td>' + r.Gross + '</td><td>' + r.DateOfJoin + '</td><td>' + r.ResignDate + '</td><td>' + r.BankAccount + '</td><td>' + r.EmpStatus + '</td><td>' + r.CompanyName + '</td><td> <button type="button" class="btn btn-sm btn-info"><i class="fa fa-edit"></i></button>  <button type="button" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button> </td></tr>'
+                        tbody_tr += '<tr><td>' + (i + 1) + '</td><td>' + r.EmpName + '</td><td>' + r.CardNo + '</td><td>' + r.Department + '</td><td>' + r.Designation + '</td><td>' + r.Floor + '</td><td>' + r.Line + '</td><td>' + r.Gross + '</td><td>' + r.DateOfJoin + '</td><td>' + r.ResignDate + '</td><td>' + r.BankAccount + '</td><td>' + r.EmpStatus + '</td><td>' + r.CompanyName + '</td><td> <button type="button" class="btn btn-edit btn-sm btn-info"><i class="fa fa-edit"></i></button>  <button type="button" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button> </td></tr>'
 
                     });
                     $("#show-employee-table>tbody").empty().append(tbody_tr);

@@ -141,6 +141,33 @@ namespace AttendanceManagment
 
         #endregion
 
+
+        #region Delete Department
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+
+        public void DeletedDepartment(int deptid)
+        {
+            using (SqlConnection con = new SqlConnection(DBConnection.DataBaseConnection))
+            {
+                SqlCommand cmd = new SqlCommand("DeleteDepartmentInfo", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add("@id", SqlDbType.Int).Value = deptid;
+                con.Open();
+                if (cmd.ExecuteNonQuery() > 0)
+                {
+                    Context.Response.Write(js.Serialize("Deleted"));
+                }
+                else
+                {
+                    Context.Response.Write(js.Serialize("Invalid"));
+                }
+            }
+        }
+
+
+        #endregion
+
         #region Designation Info
         [WebMethod]
         [ScriptMethod (ResponseFormat = ResponseFormat.Json)]
@@ -256,6 +283,30 @@ namespace AttendanceManagment
         }
         #endregion
 
+        #region Delete FloorId
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+
+        public void DeletedFloorId(int floorid)
+        {
+            using (SqlConnection con = new SqlConnection(DBConnection.DataBaseConnection))
+            {
+                SqlCommand cmd = new SqlCommand("DeleteFloorInfo", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add("@id", SqlDbType.Int).Value = floorid;
+                con.Open();
+                if (cmd.ExecuteNonQuery() > 0)
+                {
+                    Context.Response.Write(js.Serialize("Deleted"));
+                }
+                else
+                {
+                    Context.Response.Write(js.Serialize("Invalid"));
+                }
+            }
+        }
+        #endregion
+
         #region Line Info
         [WebMethod]
         [ScriptMethod (ResponseFormat = ResponseFormat.Json)]
@@ -325,9 +376,33 @@ namespace AttendanceManagment
                 }
             }
         }
-
         #endregion
 
+        #region Deleted PersonInfo
+
+        [WebMethod]
+        [ScriptMethod (ResponseFormat = ResponseFormat.Json)]
+
+        public void DeletedPersonInfo(int PersonID)
+        {
+            using(SqlConnection con = new SqlConnection(DBConnection.DataBaseConnection))
+            {
+                SqlCommand cmd = new SqlCommand("DeletePersonInfo", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add("@id", SqlDbType.Int).Value = PersonID;
+                con.Open();
+
+                if (cmd.ExecuteNonQuery() > 0)
+                {
+                    Context.Response.Write(js.Serialize("Deleted"));
+                }
+                else
+                {
+                    Context.Response.Write(js.Serialize("Invalid"));
+                }
+            }
+        }
+        #endregion
 
         #region Designation Name by Department ID
         [WebMethod]
@@ -590,6 +665,7 @@ namespace AttendanceManagment
                 {
 
                     personInfo obj = new personInfo();
+                    obj.PersonID = Convert.ToInt32(rdr["PersonID"]);
                     obj.EmployeeName = rdr["PersonName"].ToString();
                     obj.FatherName = rdr["FatherName"].ToString();
                     obj.MotherName = rdr["MotherName"].ToString();

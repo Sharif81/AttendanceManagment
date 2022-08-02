@@ -135,7 +135,7 @@
                 {
                     'data': null, //its null here because history column will contain the mRender
                     "mRender": function (data) {
-                        return '<button data-toggle="modal" class="btn btn-edit btn-info p-0 px-2" type="button" data-deptid="' + data.Id + '"><i class="fa fa-edit"></i></button> <button class="btn btn-danger p-0 px-2" type="button" data-id"' + data.Id + '" ><i class="fas fa-trash"></i></button>';
+                        return '<button data-toggle="modal" class="btn btn-edit btn-info p-0 px-2" type="button" data-deptid="' + data.Id + '" ><i class="fa fa-edit"></i></button> <button class="btn btn-danger p-0 px-2" type="button" data-id"' + data.Id + '" ><i class="fas fa-trash"></i></button>';
                     }
                 }
             ]
