@@ -176,7 +176,7 @@
      <section id="person-table">
         <div class="container-fluid">
             <div class="col-md-12">
-                <table class="table table-bordered table-hover table-responsive text-center" id="show-person-table">
+                <table class="table table-bordered table-hover table-responsive text-center nowrap" id="show-person-table">
                     <thead class="bg-info">
                         <tr>
                             <th class="text-center">SL#</th>
@@ -325,7 +325,7 @@
                     var tbody_tr = '';
                     $.each(data, function (i, r) {
 
-                        tbody_tr += '<tr><td>' + (i + 1) + '</td><td>' + r.EmployeeName + '</td><td>' + r.FatherName + '</td><td>' + r.MotherName + '</td><td>' + r.DateOfBirth + '</td><td>' + r.MaterialStatus + '</td><td>' + r.Religion + '</td><td>' + r.Gender + '</td><td>' + r.NationalID + '</td><td>' + r.ContactNo + '</td><td>' + r.Email + '</td><td>' + r.BloodGroup + '</td><td> <button type="button" data-personid="' + r.PersonID + '" data-empname="' + r.EmployeeName + '" data-fathername="' + r.FatherName + '" data-mothername="' + r.MotherName + '" data-dateofbirth="' + r.DateOfBirth + '" data-material="' + r.MaterialStatus + '" data-religion="' + r.Religion + '" data-gender="' + r.Gender + '" data-nationalid="' + r.NationalID + '" data-contact="' + r.ContactNo + '" data-email="' + r.Email + '" data-blood="' + r.BloodGroup + '" class="btn btn-edit btn-sm btn-info"><i class="fa fa-edit"></i></button> <button type="button" data-id="' + r.PersonID + '" class="btn btn-sm btn-danger tableid"><i class="fa fa-trash"></i></button> </td></tr>' 
+                        tbody_tr += '<tr><td>' + (i + 1) + '</td><td class="nowrap">' + r.EmployeeName + '</td><td>' + r.FatherName + '</td><td>' + r.MotherName + '</td><td>' + r.DateOfBirth + '</td><td>' + r.MaterialStatus + '</td><td>' + r.Religion + '</td><td>' + r.Gender + '</td><td>' + r.NationalID + '</td><td>' + r.ContactNo + '</td><td>' + r.Email + '</td><td>' + r.BloodGroup + '</td><td> <button type="button" data-personid="' + r.PersonID + '" data-empname="' + r.EmployeeName + '" data-fathername="' + r.FatherName + '" data-mothername="' + r.MotherName + '" data-dateofbirth="' + r.DateOfBirth + '" data-material="' + r.MaterialStatus + '" data-religion="' + r.Religion + '" data-gender="' + r.Gender + '" data-nationalid="' + r.NationalID + '" data-contact="' + r.ContactNo + '" data-email="' + r.Email + '" data-blood="' + r.BloodGroup + '" class="btn btn-edit btn-sm btn-info"><i class="fa fa-edit"></i></button> <button type="button" data-id="' + r.PersonID + '" class="btn btn-sm btn-danger tableid"><i class="fa fa-trash"></i></button> </td></tr>' 
 
                     });
 

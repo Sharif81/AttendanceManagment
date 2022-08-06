@@ -13,6 +13,8 @@
             font-size: 12px;
            
         }
+
+      
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -156,11 +158,55 @@
     </div>
 
 
+    <section id="employee-time-card">
+       <%-- <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#time-card-modal">
+            Launch demo modal
+        </button>--%>
+
+        <!-- Modal -->
+        <div class="modal fade" id="time-card-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header bg-info">
+                        <h5 class="modal-title" id="timeCardModalLabel">View Employee Details</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-12">                                                        
+                                   
+                                        
+                             </div>                          
+                          
+                        </div>
+                        <div class="row">
+                            <div class="col-md">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="form-control">
+                                            <p>Designation:</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     
      <section id="employee-table">
         <div class="container-fluid">
-            <div class="col-md-12">
-                <table class="table table-bordered table-hover text-center table-responsive" id="show-employee-table">
+            <div class="col-md-12 overflow-auto">
+                <table class="table table-bordered table-hover text-center table-responsive nowrap" id="show-employee-table">
                     <thead class="bg-info">
                         <tr>
                             <th class="text-center">SL#</th>
@@ -176,7 +222,7 @@
                             <th class="text-center">Resign Date</th>               
                             <th class="text-center">Status</th>
                             <th class="text-center">Company Name</th>
-                            <th class="text-center">Action</th>
+                            <th class="text-center" style="width:200px !important;">Action</th>
                                
                         </tr>
                     </thead>
@@ -295,7 +341,7 @@
                 if (status == 'success') {
                     var tbody_tr = '';
                     $.each(data, function (i, r) {
-                        tbody_tr += '<tr><td>' + (i + 1) + '</td><td>' + r.EmpName + '</td><td>' + r.CardNo + '</td><td>' + r.Department + '</td><td>' + r.Designation + '</td><td>' + r.Floor + '</td><td>' + r.Line + '</td><td>' + r.Gross + '</td><td>' + r.DateOfJoin + '</td><td>' + r.ResignDate + '</td><td>' + r.BankAccount + '</td><td>' + r.EmpStatus + '</td><td>' + r.CompanyName + '</td><td> <button type="button" class="btn btn-edit btn-sm btn-info"><i class="fa fa-edit"></i></button>  <button type="button" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button> </td></tr>'
+                        tbody_tr += '<tr><td>' + (i + 1) + '</td><td class="nowrap">' + r.EmpName + '</td><td>' + r.CardNo + '</td><td>' + r.Department + '</td><td>' + r.Designation + '</td><td>' + r.Floor + '</td><td>' + r.Line + '</td><td>' + r.Gross + '</td><td>' + r.DateOfJoin + '</td><td>' + r.ResignDate + '</td><td>' + r.BankAccount + '</td><td>' + r.EmpStatus + '</td><td>' + r.CompanyName + '</td><td> <button type="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#time-card-modal"><i class="fas fa-align-justify"></i></button> <button type="button" class="btn btn-edit btn-sm btn-info"><i class="fa fa-edit"></i></button> <button type="button" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button> </td></tr>'
 
                     });
                     $("#show-employee-table>tbody").empty().append(tbody_tr);

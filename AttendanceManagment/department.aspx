@@ -139,7 +139,7 @@
                     var tbody_tr = '';
                     $.each(data, function (i, r) {
 
-                        tbody_tr += '<tr><td>' + (i + 1) + '</td><td>' + r.DepartmentID + '</td><td>' + r.DepartmentName + '</td><td> <button type="button" data-departmentid="'+r.DepartmentID+'" data-departmentname="'+r.DepartmentName+'" class="edit-btn btn-sm btn-info"><i class="fa fa-edit"></i></button>  <button type="button" data-id="'+r.DepartmentID+'" class="btn btn-sm btn-danger tableid"><i class="fa fa-trash"></i></button> </td></tr>'
+                        tbody_tr += '<tr><td>' + (i + 1) + '</td><td>' + r.DepartmentID + '</td><td>' + r.DepartmentName + '</td><td> <button type="button" data-departmentid="'+r.DepartmentID+'" data-departmentname="'+r.DepartmentName+'" class="btn edit-btn btn-sm btn-info"><i class="fa fa-edit"></i></button>  <button type="button" data-id="'+r.DepartmentID+'" class="btn btn-sm btn-danger tableid"><i class="fa fa-trash"></i></button> </td></tr>'
                     });
                     $("#show-department-table>tbody").empty().append(tbody_tr);
                     $("#show-department-table").DataTable();
